@@ -2,8 +2,13 @@ import {LightningElement,track} from 'lwc';
 
 export default class TodoManager extends LightningElement 
 {
-    time = "8:10 PM";
-    greeting = "Evening";
+    @track time = "8:10 PM";
+    @track greeting = "Evening";
+    @track todos= [];
+
+
+
+
 
     connectedCallback()
     {
@@ -56,6 +61,16 @@ export default class TodoManager extends LightningElement
         {
             this.greeting = "Good Evening";
         }
+    }
+
+
+    // todo handeler on click event of add buttn
+    addTodoHandler()
+    {
+        const  inputBox = this.template.querySelector("lightning-input");
+        console.log('Current value :', inputBox.value);
+        this.todos.push(inputBox.value); 
+        inputBox.value = "";
     }
 }
 
