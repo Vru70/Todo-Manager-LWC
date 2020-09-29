@@ -69,9 +69,16 @@ export default class TodoManager extends LightningElement
     {
         const  inputBox = this.template.querySelector("lightning-input");
         console.log('Current value :', inputBox.value);
-        this.todos.push(inputBox.value); 
+        const todo ={
+            todoId: this.todos.length,
+            todoName: inputBox.value,
+            done: false,
+            todoDate: new Date()
+        }
+         
+        this.todos.push(todo);
         inputBox.value = "";
     }
 }
 
-//23:38 
+//45:00 -> PointerVLC
