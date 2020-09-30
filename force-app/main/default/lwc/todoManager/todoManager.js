@@ -1,3 +1,4 @@
+import addTodo from '@salesforce/apex/ToDoController.addTodo';
 import {LightningElement,track} from 'lwc';
 
 export default class TodoManager extends LightningElement 
@@ -70,13 +71,19 @@ export default class TodoManager extends LightningElement
         const  inputBox = this.template.querySelector("lightning-input");
         console.log('Current value :', inputBox.value);
         const todo ={
-            todoId: this.todos.length,
+            
             todoName: inputBox.value,
-            done: false,
-            todoDate: new Date()
+            done: false 
         }
-         
-        this.todos.push(todo);
+        addTodo({payload : JSON.stringify(todo)}).then(response =>{
+            console.log('Item Inserted Successfully');
+        }).catch(error =>{
+            console.error('Error in insertig TODO item' + error );
+        });
+
+
+
+        // this.todos.push(todo);
         inputBox.value = "";
     }
 
