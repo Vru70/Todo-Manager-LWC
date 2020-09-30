@@ -42,7 +42,14 @@
 
          <lightning-layout-item size="12">
             <div>UPCOMING</div>
-            <template for:each={todos} for:item="todo" for:index="index">
+            <template for:each={upcomingTask} for:item="todo" for:index="index">
+                <c-todo-item key={todo.todoId}> 
+
+                </c-todo-item>
+            </template>
+
+            <div>COMPLETED</div>
+            <template for:each={completedTask} for:item="todo" for:index="index">
                <div class="item-class" key={todo.todoId}>
                    <span class="slds-text-heading_label">{todo.todoName}</span>
                    <lightning-button-icon icon-name="utility:check" class="slds-p-horizontal_medium"
@@ -51,8 +58,6 @@
                     <lightning-button-icon icon-name="utility:delete" class="slds-p-horizontal_medium"
                     title="delete todo" onclick={deleteHandler}> </lightning-button-icon>
                </div>
-             
-
             </template>
         </lightning-layout-item>
     </lightning-layout>

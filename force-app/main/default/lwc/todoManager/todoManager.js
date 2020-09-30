@@ -79,6 +79,17 @@ export default class TodoManager extends LightningElement
         this.todos.push(todo);
         inputBox.value = "";
     }
+
+
+    get upcomingTask()
+    {
+        return this.todos && this.todos.length ? this.todos.filter( todo => !todo.done) : [];
+    }
+
+    get completedTask()
+    {
+        return this.todos && this.todos.length ? this.todos.filter( todo => todo.done) : [];
+    }
 }
 
 //45:00 -> PointerVLC
