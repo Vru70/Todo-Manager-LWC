@@ -1,3 +1,5 @@
+import addTodo from '@salesforce/apex/ToDoController.addTodo';
+import getcurrentTodos from '@salesforce/apex/ToDoController.getcurrentTodos';
 import {LightningElement,track} from 'lwc';
 
 export default class TodoManager extends LightningElement 
@@ -13,6 +15,9 @@ export default class TodoManager extends LightningElement
     connectedCallback()
     {
         this.getTime();
+
+        this.fetchTodos();
+
 
         setInterval(() => {
             this.getTime();
@@ -69,16 +74,51 @@ export default class TodoManager extends LightningElement
     {
         const  inputBox = this.template.querySelector("lightning-input");
         console.log('Current value :', inputBox.value);
+
         const todo ={
-            todoId: this.todos.length,
+            
             todoName: inputBox.value,
-            done: false,
-            todoDate: new Date()
+            done: false 
         }
-         
-        this.todos.push(todo);
+
+
+        addTodo({payload : JSON.stringify(todo)}).then(response =>{
+            console.log('Item Inserted Successfully');
+            this.fetchTodos();
+        }).catch(error =>{
+            console.error('Error in insertig TODO item' + error );
+        });
+
+
+
+        // this.todos.push(todo);
         inputBox.value = "";
+    }
+
+
+    get upcomingTask()
+    {
+        return this.todos && this.todos.length ? this.todos.filter( todo => !todo.done) : [];
+    }
+
+    get completedTask()
+    {
+        return this.todos && this.todos.length ? this.todos.filter( todo => todo.done) : [];
+    }
+
+    fetchTodos()
+    {
+        getcurrentTodos().then(result =>{
+            if(result){
+                console.log('retrived from server',result.length);
+                this.todos = result;
+            }
+            
+
+        }).catch(error =>{
+            console.error('Error in fetchings TODO ' + error );
+        });
     }
 }
 
-//45:00 -> PointerVLC
+//1:19:00 -> PointerVLC
