@@ -42,14 +42,15 @@
 
          <lightning-layout-item size="12">
             <div>UPCOMING</div>
-            <template for:each={upcomingTask} for:item="todo" for:index="index">
-                <c-todo-item key={todo.todoId} todo-id={todo.todoID} todo-name={todo.todoName}>
+            <template for:each={upcomingTask} for:item="todo" >
+                <c-todo-item key={todo.todoId} todo-id={todo.todoID} todo-name={todo.todoName} 
+                onupdate={updateHandler} ondelete={deleteHandler}>
                 </c-todo-item>
             </template>
 
             <div>COMPLETED</div>
-            <template for:each={completedTask} for:item="todo" for:index="index">
-                <c-todo-item key={todo.todoId} todo-id={todo.todoID} todo-name={todo.todoName} done>
+            <template for:each={completedTask} for:item="todo" >
+                <c-todo-item key={todo.todoId} todo-id={todo.todoID} todo-name={todo.todoName} done onupdate={updateHandler} ondelete={deleteHandler}> 
                 </c-todo-item>
             </template>
         </lightning-layout-item>

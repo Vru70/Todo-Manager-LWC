@@ -101,6 +101,17 @@ export default class TodoManager extends LightningElement
         return this.todos && this.todos.length ? this.todos.filter( todo => !todo.done) : [];
     }
 
+
+    updateHandler()
+    {
+        this.fetchTodos();
+    }
+
+    deleteHandler()
+    {
+        this.fetchTodos();
+    }
+
     get completedTask()
     {
         return this.todos && this.todos.length ? this.todos.filter( todo => todo.done) : [];
