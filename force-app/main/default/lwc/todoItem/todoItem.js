@@ -20,7 +20,8 @@ export default class TodoItem extends LightningElement
 
         updateTodo({payload : JSON.stringify(todo)}).then(result =>{
             console.log('Item Updated Successfully');
-        
+        const updateEvent = new CustomEvent('update');
+        this.dispatchEvent(updateEvent);
         }).catch(error =>{
             console.error('Error in UPDATE', error );
         });
@@ -30,7 +31,8 @@ export default class TodoItem extends LightningElement
     {
         deleteTodo({todoId: this.todoId}).then(result =>{
             console.log('Item Deleted Successfully');
-           
+            const deleteEvent = new CustomEvent('delete');
+            this.dispatchEvent(deleteEvent);
         }).catch(error =>{
             console.error('Error in Delete', error );
         });
