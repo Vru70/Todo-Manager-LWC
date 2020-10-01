@@ -10,7 +10,11 @@ export default class TodoItem extends LightningElement
 
     get containerClass()
     {
-        return this.done ? "todo completed" : "todo upcomming"
+        return this.done ? "todo completed" : "todo upcomming";
     }
 
+    get iconName()
+    {
+        return this.done ? "utility:check" : "utility:add";
+    }
 }
